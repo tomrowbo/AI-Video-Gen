@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Block Explorer Links Demo</title>
+    <style>
+        body { font-family: monospace; background: #1a1a1a; color: white; padding: 20px; }
+        .section { background: rgba(255,255,255,0.1); padding: 15px; margin: 10px 0; border-radius: 8px; }
+        .link { color: #60a5fa; text-decoration: underline; }
+        .link:hover { color: #93c5fd; }
+    </style>
+</head>
+<body>
+    <h2>🔗 Block Explorer Links Preview</h2>
+
+    <div class="section">
+        <h3>Premium Ticket Payment ($0.10 USDC)</h3>
+        <div>Amount: $0.10 USDC</div>
+        <div>Network: Base Sepolia (Testnet)</div>
+        <div>Protocol: x402</div>
+        <div>Status: ✅ Verified & Settled</div>
+        <br>
+        <div>Transaction: <a href="https://sepolia.basescan.org/tx/0x1234567890abcdef1234567890abcdef12345678" class="link" target="_blank">View on BaseScan ↗</a></div>
+        <div>From: <a href="https://sepolia.basescan.org/address/0xuser123456789abcdef" class="link" target="_blank">0xuser...cdef ↗</a></div>
+        <div>Block: <a href="https://sepolia.basescan.org/block/12345678" class="link" target="_blank">#12345678 ↗</a></div>
+    </div>
+
+    <div class="section">
+        <h3>VIP Ticket Payment ($0.25 USDC)</h3>
+        <div>Amount: $0.25 USDC</div>
+        <div>Network: Base Sepolia (Testnet)</div>
+        <div>Protocol: x402</div>
+        <div>Status: ✅ Verified & Settled</div>
+        <br>
+        <div>Transaction: <a href="https://sepolia.basescan.org/tx/0xabcdef1234567890abcdef1234567890abcdef12" class="link" target="_blank">View on BaseScan ↗</a></div>
+        <div>From: <a href="https://sepolia.basescan.org/address/0xvip987654321fedcba" class="link" target="_blank">0xvip9...dcba ↗</a></div>
+        <div>Block: <a href="https://sepolia.basescan.org/block/12345679" class="link" target="_blank">#12345679 ↗</a></div>
+    </div>
+
+    <div class="section">
+        <h3>📝 What Users Will See:</h3>
+        <ul>
+            <li><strong>Transaction link</strong> → Full transaction details on BaseScan</li>
+            <li><strong>Address link</strong> → Sender's wallet activity</li>
+            <li><strong>Block link</strong> → Block details and confirmations</li>
+            <li><strong>Shortened addresses</strong> → Better UX (0x1234...abcd format)</li>
+            <li><strong>Theme colors</strong> → Blue for Premium, Purple for VIP</li>
+        </ul>
+    </div>
+</body>
+</html>
