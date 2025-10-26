@@ -31,16 +31,7 @@ interface Agent {
   balance: number; // Logical balance in shared wallet
 }
 
-interface SharedWallet {
-  address: string;
-  totalBalance: number;
-  lastUpdated: Date;
-}
-
-interface UserCredit {
-  agentId: string;
-  balance: number;
-}
+// Clean up unused interfaces
 
 // Note: Wallet configuration now loaded dynamically from blockchain
 
@@ -261,14 +252,14 @@ export default function VideoGenerator() {
                 return [...filtered, progressMessage];
               });
             }
-          } catch (error: any) {
+          } catch (error: unknown) {
             console.error('Polling error:', error);
             isComplete = true;
 
             const errorMessage: Message = {
               id: Date.now().toString(),
               role: 'assistant',
-              content: `❌ **Generation failed**\n\nError: ${error.message}\n\nPlease try again.`,
+              content: `❌ **Generation failed**\n\nError: ${error instanceof Error ? error.message : 'Unknown error'}\n\nPlease try again.`,
               timestamp: new Date()
             };
 
@@ -310,7 +301,7 @@ export default function VideoGenerator() {
       // Clean up URL params
       window.history.replaceState({}, '', '/video-generator');
     }
-  }, []);
+  }, [currentVideo?.agent]);
 
   const handleSendMessage = async () => {
     if (!inputValue.trim() || isGenerating) return;
@@ -600,14 +591,14 @@ export default function VideoGenerator() {
                 return [...filtered, progressMessage];
               });
             }
-          } catch (error: any) {
+          } catch (error: unknown) {
             console.error('Polling error:', error);
             isComplete = true;
 
             const errorMessage: Message = {
               id: Date.now().toString(),
               role: 'assistant',
-              content: `❌ **Generation failed**\n\nError: ${error.message}\n\nPlease try again.`,
+              content: `❌ **Generation failed**\n\nError: ${error instanceof Error ? error.message : 'Unknown error'}\n\nPlease try again.`,
               timestamp: new Date()
             };
 
@@ -633,14 +624,14 @@ export default function VideoGenerator() {
 
       pollOperation();
 
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Autonomous payment error:', error);
       setIsGenerating(false);
 
       const errorMessage: Message = {
         id: Date.now().toString(),
         role: 'assistant',
-        content: `❌ **Autonomous payment failed**\n\nError: ${error.message}\n\n${error.message.includes('Insufficient') ? `💡 **Solution:** Top up the shared agent wallet with USDC!\n📧 Send USDC to: \`${walletAddress}\`` : 'Please try again.'}`,
+        content: `❌ **Autonomous payment failed**\n\nError: ${error instanceof Error ? error.message : 'Unknown error'}\n\n${error instanceof Error ? error.message : 'Unknown error'.includes('Insufficient') ? `💡 **Solution:** Top up the shared agent wallet with USDC!\n📧 Send USDC to: \`${walletAddress}\`` : 'Please try again.'}`,
         timestamp: new Date()
       };
 
@@ -804,7 +795,7 @@ export default function VideoGenerator() {
                               <h3 className="text-lg font-bold mb-2">Video Generated Successfully!</h3>
                               <p className="text-sm text-gray-400 text-center mb-4">
                                 Your 8-second video is ready for download.<br />
-                                Due to Google's API restrictions, preview is not available,<br />
+                                Due to Google&apos;s API restrictions, preview is not available,<br />
                                 but you can download the video directly.
                               </p>
                               <div className="text-xs text-gray-500">
@@ -829,7 +820,7 @@ export default function VideoGenerator() {
                             </a>
                           )}
                           <button
-                            onClick={() => window.open(`/api/download-video?url=${encodeURIComponent(currentVideo.videoUrl)}`, '_blank')}
+                            onClick={() => currentVideo.videoUrl && window.open(`/api/download-video?url=${encodeURIComponent(currentVideo.videoUrl)}`, '_blank')}
                             className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors font-bold"
                           >
                             🔗 View Video

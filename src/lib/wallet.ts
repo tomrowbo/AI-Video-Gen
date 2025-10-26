@@ -48,7 +48,7 @@ export async function getUSDCBalance(address: string): Promise<number> {
 
 // Get wallet info with real blockchain data
 export async function getAgentWalletInfo() {
-  const { wallet, address } = generateAgentWallet();
+  const { address } = generateAgentWallet();
   const usdcBalance = await getUSDCBalance(address);
 
   return {
@@ -110,6 +110,6 @@ export async function executeRealPayment(amount: number, recipient?: string) {
 
   } catch (error) {
     console.error('Real payment failed:', error);
-    throw new Error(`Payment execution failed: ${error.message}`);
+    throw new Error(`Payment execution failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
   }
 }

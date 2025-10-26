@@ -96,13 +96,13 @@ export async function POST(request: NextRequest) {
       timestamp: new Date().toISOString()
     });
 
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Autonomous agent payment error:', error);
 
     return NextResponse.json(
       {
         error: 'Autonomous payment failed',
-        details: error.message,
+        details: error instanceof Error ? error.message : 'Unknown error',
         timestamp: new Date().toISOString()
       },
       { status: 500 }
@@ -111,7 +111,7 @@ export async function POST(request: NextRequest) {
 }
 
 // GET endpoint to check wallet balance
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     const walletInfo = await getAgentWalletInfo();
 
@@ -122,13 +122,13 @@ export async function GET(request: NextRequest) {
       timestamp: new Date().toISOString()
     });
 
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Wallet balance check error:', error);
 
     return NextResponse.json(
       {
         error: 'Failed to check wallet balance',
-        details: error.message,
+        details: error instanceof Error ? error.message : 'Unknown error',
         timestamp: new Date().toISOString()
       },
       { status: 500 }

@@ -2,7 +2,7 @@ import { paymentMiddleware } from 'x402-next';
 import { facilitator } from '@coinbase/x402';
 
 // Replace with your wallet address that will receive payments
-const RECEIVER_ADDRESS = process.env.RECEIVER_ADDRESS || "0x742d35Cc6634C0532925a3b8D098Ef82E8d0aEE4";
+const RECEIVER_ADDRESS = (process.env.RECEIVER_ADDRESS || "0x742d35Cc6634C0532925a3b8D098Ef82E8d0aEE4") as `0x${string}`;
 
 export const middleware = paymentMiddleware(
   RECEIVER_ADDRESS,

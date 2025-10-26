@@ -32,7 +32,7 @@ export default function Home() {
               <div className="text-5xl mb-4">🎬</div>
               <h3 className="text-xl font-bold text-white mb-4">Describe Your Video</h3>
               <p className="text-gray-300">
-                Tell our AI agents what you want to create. They'll analyze and optimize your prompt for the best results.
+                Tell our AI agents what you want to create. They&apos;ll analyze and optimize your prompt for the best results.
               </p>
             </div>
 

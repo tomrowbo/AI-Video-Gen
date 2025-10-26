@@ -82,12 +82,12 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.redirect(successUrl.toString());
 
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Paid video generation error:', error);
 
     // Redirect back with error
     const errorUrl = new URL('/video-generator', request.url);
-    errorUrl.searchParams.set('payment_error', encodeURIComponent(error.message));
+    errorUrl.searchParams.set('payment_error', encodeURIComponent(error instanceof Error ? error.message : 'Unknown error'));
 
     return NextResponse.redirect(errorUrl.toString());
   }
